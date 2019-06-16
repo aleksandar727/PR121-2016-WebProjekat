@@ -22,9 +22,7 @@ namespace WebAplikacija.Models
         public string VremeZaOdjavu { get; set; } = "10 AM";
         public Status Status { get; set; }
         public List<SadrzajApartmana> ListaSadrzajaApartmana { get; set; }
-        public List<Korisnik> RezervacijeKorisnik { get; set; }
-
-
+        public List<Rezervacija> Rezervacije { get; set; }
     }
 
     public enum Status
