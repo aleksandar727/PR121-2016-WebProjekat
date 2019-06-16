@@ -15,7 +15,7 @@ namespace WebAplikacija.Models
         public List<DateTime> DatumiZaIzdavanje { get; set; }
         public List<DateTime> DostupnostPoDatumima { get; set; }
         public Korisnik Domacin { get; set; }
-        public List<string> KomentariGostiju { get; set; }
+        public List<KomentarZaApartman> KomentariGostiju { get; set; }
         public List<Image> SlikeApartmana { get; set; }
         public double CenaPoNoci { get; set; }
         public string VremeZaPrijavu { get; set; } = "2 PM";

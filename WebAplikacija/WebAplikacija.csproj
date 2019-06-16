@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Apartman.cs" />
+    <Compile Include="Models\KomentarZaApartman.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Lokacija.cs" />
     <Compile Include="Models\Rezervacija.cs" />
