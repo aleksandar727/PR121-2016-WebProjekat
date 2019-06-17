@@ -29,23 +29,32 @@
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-               
-                    
 
-                    <li><a href="~/Login">Log in</a></li>
-                    <li><a href="~/Register/Index">Register</a></li>
+                    @if (ViewBag.Korisnik != null)
+                    {
+                        if (!ViewBag.Korisnik.LoggedIn)
+                        {
+                            <li><a href="~/Login">Log in</a></li>
+                            <li><a href="~/Register/Index">Register</a></li>
+                        }
+                    }
+
                     @if (ViewBag.Korisnik != null)
                     {
                         if (ViewBag.Korisnik.LoggedIn)
                         {
                             <li><a href="~/MojProfil/Index">Moj Profil</a></li>
+                            if (ViewBag.Korisnik.IsAdmin())
+                            {
+                                <li><a href="~/MojProfil/ListajKorisnike">Svi korisnici</a></li>
+                            }
                             <li><a href="~/Login/SignOff">Odjavi se</a></li>
                         }
 
                     }
                 </ul>
             </div>
-            
+
         </div>
     </div>
     <div class="container body-content">

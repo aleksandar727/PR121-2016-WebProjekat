@@ -60,5 +60,31 @@ namespace WebAplikacija.Controllers
 
             return View("Index");
         }
+
+        public ActionResult ListajKorisnike()
+        {
+            Korisnik korisnik = (Korisnik)Session["Korisnik"];
+            if (korisnik == null)
+            {
+                korisnik = new Korisnik();
+                Session["Korisnik"] = korisnik;
+            }
+
+            if (!korisnik.IsAdmin())
+            {
+                return View("Greska");
+            }
+
+            List<Korisnik> listajKorisnikeList = new List<Korisnik>();
+            var listajKorisnike = Korisnici.dictionaryKorisnici.Values.ToArray();
+            Array.Sort(listajKorisnike, (x,y) => String.Compare(x.UlogaKorisnika.ToString(), y.UlogaKorisnika.ToString()));
+
+            listajKorisnikeList = listajKorisnike.ToList();
+
+            ViewBag.ListajKorisnikeList = listajKorisnikeList;
+            ViewBag.Korisnik = korisnik;
+
+            return View();
+        }
     }
 }

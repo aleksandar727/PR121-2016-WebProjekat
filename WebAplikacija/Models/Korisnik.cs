@@ -19,6 +19,7 @@ namespace WebAplikacija.Models
 
         public bool LoggedIn { get; set; } = false;
         public DateTime LoggingDate { get; set; }
+        
         #endregion
 
         #region Constructors
@@ -58,7 +59,7 @@ namespace WebAplikacija.Models
         #endregion
 
         #region Methods
-        public void LogOff()
+        /*public void LogOff()
         {
             KorisnickoIme = "";
             Lozinka = "";
@@ -67,7 +68,12 @@ namespace WebAplikacija.Models
             this.Apartmani = null;
             this.Rezervacije = null;
             LoggedIn = false;
+        }*/
+        public bool IsAdmin()
+        {
+            return UlogaKorisnika == UlogaKorisnika.Administrator;
         }
+        
 
         public override string ToString()
         {
@@ -78,8 +84,8 @@ namespace WebAplikacija.Models
 
     public enum UlogaKorisnika
     {
+        Gost,
         Administrator,
-        Domacin,
-        Gost
+        Domacin
     }
 }

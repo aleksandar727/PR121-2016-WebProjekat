@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "ListajKorisnike";
+}
+@if (ViewBag.Korisnik.IsAdmin())
+{
+    <h2>Svi korisnici: </h2>
+
+    <table cellspacing=2 cellpadding=3 border=0>
+        @foreach (var k in ViewBag.ListajKorisnikeList)
+        {
+            <tr>
+                <td align=left><b>Korisnik:</b>  </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+
+                <td align=left>Uloga:  </td>
+                <td>&nbsp;</td>
+                <td><b>@k.UlogaKorisnika</b></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+
+                <td align=left>Ime:  </td>
+                <td>&nbsp;</td>
+                <td><b>@k.Ime</b></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+
+                <td align=left>Prezime:  </td>
+                <td>&nbsp;</td>
+                <td><b>@k.Prezime</b></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+
+                <td align=left>Korisnicko ime:  </td>
+                <td>&nbsp;</td>
+                <td><b>@k.KorisnickoIme</b></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+
+                <td align=left>Lozinka:  </td>
+                <td>&nbsp;</td>
+                <td><b>@k.Lozinka</b></td>
+            </tr>
+            <tr>&nbsp;</tr>
+            <tr>&nbsp;</tr>
+
+        }
+    </table>
+}
+else
+{
+    <h2>Nemate pravo da pogledate spisak svih korisnika!</h2>
+}
+

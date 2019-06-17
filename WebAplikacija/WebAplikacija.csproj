@@ -179,6 +179,8 @@
     <Content Include="Views\Login\Result.cshtml" />
     <Content Include="Views\Login\SignOff.cshtml" />
     <Content Include="Views\MojProfil\Index.cshtml" />
+    <Content Include="Views\MojProfil\ListajKorisnike.cshtml" />
+    <Content Include="Views\MojProfil\Greska.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
