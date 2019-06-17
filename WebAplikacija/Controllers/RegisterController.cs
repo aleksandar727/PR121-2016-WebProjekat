@@ -26,7 +26,6 @@ namespace WebAplikacija.Controllers
         [HttpPost]
         public ActionResult Register()
         {
-            Korisnici korisnici = (Korisnici)HttpContext.Application["Korisnici"];
             Korisnik korisnik = (Korisnik)Session["Korisnik"];
             if(korisnik == null)
             {
@@ -35,7 +34,7 @@ namespace WebAplikacija.Controllers
             }
             if(!string.IsNullOrEmpty(Request["Ime"]) && !string.IsNullOrEmpty(Request["Prezime"]) && !string.IsNullOrEmpty(Request["KorisnickoIme"]) && !string.IsNullOrEmpty(Request["Lozinka"]))
             {
-                if(!korisnici.dictionaryKorisnici.ContainsKey(Request["KorisnickoIme"]))
+                if(!Korisnici.dictionaryKorisnici.ContainsKey(Request["KorisnickoIme"]))
                 {
                     korisnik.KorisnickoIme = Request["KorisnickoIme"];
                     korisnik.Ime = Request["Ime"];

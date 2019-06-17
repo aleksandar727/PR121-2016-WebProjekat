@@ -9,10 +9,11 @@ namespace WebAplikacija.Models.PomocneKlase
 {
     public class Korisnici
     {
-        public Dictionary<string, Korisnik> dictionaryKorisnici { get; set; }
+        public static Dictionary<string, Korisnik> dictionaryKorisnici { get; set; } = new Dictionary<string, Korisnik>();
+
 
         #region Constructors
-        public Korisnici() { dictionaryKorisnici = new Dictionary<string, Korisnik>(); }
+        public Korisnici() { }
         public Korisnici(string putanja)
         {
             dictionaryKorisnici = new Dictionary<string, Korisnik>();
@@ -21,12 +22,15 @@ namespace WebAplikacija.Models.PomocneKlase
             FileStream stream = new FileStream(putanja, FileMode.Open);
             StreamReader sr = new StreamReader(stream);
             string line = "";
-            while ((line = sr.ReadLine()) != null) // JohnLast;JohnLastPass;John;Last;Guest;Apartman1 Apartman2 Apartman3;Rezervacija1 Rezervacija2
+            while ((line = sr.ReadLine()) != null) 
             {
                 string[] uT = line.Split(';'); // uT - Ucitani Text
                 Korisnik korisnik = new Korisnik(uT[0], uT[1], uT[2], uT[3]);
+                korisnik.UlogaKorisnika = UlogaKorisnika.Administrator;
+                Korisnici.dictionaryKorisnici.Add(korisnik.KorisnickoIme, korisnik);
             }
-
+            sr.Close();
+            stream.Close();
         }
         #endregion 
     }

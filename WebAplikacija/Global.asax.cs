@@ -17,8 +17,8 @@ namespace WebAplikacija
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            Korisnici korisnici = new Korisnici();
-            HttpContext.Current.Application["Korisnici"] = korisnici;
+            Korisnici korisnici = new Korisnici("~/App_Data/Administratori.txt");
+
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

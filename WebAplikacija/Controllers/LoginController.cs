@@ -27,7 +27,6 @@ namespace WebAplikacija.Controllers
         [HttpPost]
         public ActionResult Login()
         {
-            Korisnici korisnici = (Korisnici)HttpContext.Application["Korisnici"];
             Korisnik korisnik = (Korisnik)Session["Korisnik"];
             if (korisnik == null)
             {
@@ -37,11 +36,11 @@ namespace WebAplikacija.Controllers
 
             if (!string.IsNullOrEmpty(Request["KorisnickoIme"]) && !string.IsNullOrEmpty(Request["Lozinka"]))
             {
-                if (korisnici.dictionaryKorisnici.ContainsKey(Request["KorisnickoIme"]))
+                if (Korisnici.dictionaryKorisnici.ContainsKey(Request["KorisnickoIme"]))
                 {
-                    if (korisnici.dictionaryKorisnici[Request["KorisnickoIme"]].Lozinka.Equals(Request["Lozinka"]))
+                    if (Korisnici.dictionaryKorisnici[Request["KorisnickoIme"]].Lozinka.Equals(Request["Lozinka"]))
                     {
-                        korisnik = korisnici.dictionaryKorisnici[Request["KorisnickoIme"]];
+                        korisnik = Korisnici.dictionaryKorisnici[Request["KorisnickoIme"]];
                         korisnik.LoggedIn = true;
                         DateTime TryDate;
                         DateTime.TryParse(Request["LoggingDate"], out TryDate);
