@@ -2,21 +2,12 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Register forma</h2>
 @if (ViewBag.Korisnik.LoggedIn == false)
 {
-    <form action="~/Register/Register" method="post">
+    <h2>Ulogujte se: </h2>
+    <form action="~/Login/Login" method="post">
         <input type="hidden" name="LoggingDate" value="@DateTime.Now">
         <table cellspacing=0 cellpadding=3 border=0>
-            <tr>
-                <td align=left>Ime:  </td>
-                <td><input type="text" name="Ime"></td>
-            </tr>
-            <tr>
-                <td align=left>Prezime:  </td>
-                <td><input type="text" name="Prezime"></td>
-            </tr>
             <tr>
                 <td align=left>Korisnicko ime:  </td>
                 <td><input type="text" name="KorisnickoIme"></td>
@@ -27,14 +18,15 @@
             </tr>
             <tr>
                 <td align=left>&nbsp;  </td>
-                <td><input type="submit" value=" Registruj me! "></td>
+                <td><input type="submit" value=" Loguj se! "></td>
             </tr>
         </table>
     </form>
 }
 else
 {
-    <p> Već ste se prijavili! </p>
+    <p> Već ste ulogovani! </p>
     <p>[<a href="~/Register/SignOff">Odjavi se</a>]</p>
 }
-    <p>[<a href="~/Home/Index">Povratak na pocetnu stranicu</a>]</p>
+<p>[<a href="~/Home/Index">Povratak na pocetnu stranicu</a>]</p>
+

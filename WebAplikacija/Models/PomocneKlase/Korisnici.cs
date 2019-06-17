@@ -9,8 +9,10 @@ namespace WebAplikacija.Models.PomocneKlase
 {
     public class Korisnici
     {
-        public static Dictionary<string, Korisnik> dictionaryKorisnici { get; set; }
+        public Dictionary<string, Korisnik> dictionaryKorisnici { get; set; }
 
+        #region Constructors
+        public Korisnici() { dictionaryKorisnici = new Dictionary<string, Korisnik>(); }
         public Korisnici(string putanja)
         {
             dictionaryKorisnici = new Dictionary<string, Korisnik>();
@@ -26,5 +28,6 @@ namespace WebAplikacija.Models.PomocneKlase
             }
 
         }
+        #endregion 
     }
 }

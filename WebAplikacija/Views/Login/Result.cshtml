@@ -3,11 +3,11 @@
     ViewBag.Title = "Result";
 }
 
-<h2>Registrujte se</h2>
+<h2>Uloguj se</h2>
 @if (ViewBag.Korisnik.LoggedIn)
 {
     <p>
-        Uspešno ste se registrovali:<br />
+        Uspešno ste se prijavili:<br />
         Username: <b>@ViewBag.Korisnik.KorisnickoIme</b><br />
         LoggingDate: <b>@ViewBag.Korisnik.LoggingDate</b><br />
     </p>
@@ -16,7 +16,7 @@
 else
 {
     <p>
-        Niste se uspešno registrovali!<br />
+        Niste se uspešno prijavili!<br />
         @ViewBag.Message
     </p>
 }

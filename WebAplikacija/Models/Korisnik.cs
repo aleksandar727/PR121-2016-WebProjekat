@@ -58,26 +58,6 @@ namespace WebAplikacija.Models
         #endregion
 
         #region Methods
-
-        public bool LogIn()
-        {
-            if(Korisnici.dictionaryKorisnici.ContainsKey(KorisnickoIme))
-            {
-                if (Korisnici.dictionaryKorisnici[KorisnickoIme].Lozinka.Equals(this.Lozinka))
-                {
-                    LoggedIn = true;
-                }
-                else
-                    LoggedIn = false;
-            }
-            else
-            {
-                LoggedIn = false;
-            }
-
-            return LoggedIn;
-        }
-
         public void LogOff()
         {
             KorisnickoIme = "";

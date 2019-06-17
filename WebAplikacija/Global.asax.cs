@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebAplikacija.Models.PomocneKlase;
 
 namespace WebAplikacija
 {
@@ -15,6 +16,9 @@ namespace WebAplikacija
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Korisnici korisnici = new Korisnici();
+            HttpContext.Current.Application["Korisnici"] = korisnici;
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
