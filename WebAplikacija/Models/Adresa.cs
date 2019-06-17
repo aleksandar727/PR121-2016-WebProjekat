@@ -14,7 +14,7 @@ namespace WebAplikacija.Models
 
         public override string ToString()
         {
-            return $"{Ulica} {Broj}\n{NaseljenoMesto} {PostarinskiBroj}\n";
+            return $"{Ulica} {Broj} {NaseljenoMesto} {PostarinskiBroj}";
         }
     }
 }

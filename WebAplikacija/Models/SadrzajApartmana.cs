@@ -7,7 +7,26 @@ namespace WebAplikacija.Models
 {
     public class SadrzajApartmana
     {
+        #region Fields
         public int Id { get; set; }
         public string NazivSadrzaja { get; set; }
+        #endregion
+
+        #region Constructors
+        public SadrzajApartmana() { }
+
+        public SadrzajApartmana(int Id, string NazivSadrzaja)
+        {
+            this.Id = Id;
+            this.NazivSadrzaja = NazivSadrzaja;
+        }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return $"{Id} {NazivSadrzaja}";
+        }
+        #endregion
     }
 }

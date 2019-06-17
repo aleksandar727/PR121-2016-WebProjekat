@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+}
+
+<h2>Register</h2>
+@if (ViewBag.Korisnik.LoggedIn)
+{
+    <p>
+        Uspešno ste se prijavili:<br />
+        Username: <b>@ViewBag.Korisnik.KorisnickoIme</b><br />
+        LoggingDate: <b>@ViewBag.Korisnik.LoggingDate</b><br />
+    </p>
+    <a href="~/Register/SignOff"> Odjavi se</a><br />
+}
+else
+{
+    <p>
+        Niste se uspešno registrovali!<br />
+    </p>
+}
+
+Kliknite <a href="~/Register">ovde</a> za povratak na register stranicu.<br />
+

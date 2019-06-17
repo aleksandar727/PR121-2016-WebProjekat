@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login forma</h2>
+@if (ViewBag.Korisnik.LoggedIn == false)
+{
+    <form action="~/Register/Register" method="post">
+        <input type="hidden" name="LoggingDate" value="@DateTime.Now">
+        <table cellspacing=0 cellpadding=3 border=0>
+            <tr>
+                <td align=right>Ime:</td>
+                <td><input type="text" name="Ime"></td>
+            </tr>
+            <tr>
+                <td align=right>Prezime:</td>
+                <td><input type="text" name="Prezime"></td>
+            </tr>
+            <tr>
+                <td align=right>Korisnicko ime:</td>
+                <td><input type="text" name="KorisnickoIme"></td>
+            </tr>
+            <tr>
+                <td align=right>Lozinka:</td>
+                <td><input type="password" name="Lozinka"></td>
+            </tr>
+            <tr>
+                <td align=right>&nbsp;</td>
+                <td><input type="submit" value=" Registruj me! "></td>
+            </tr>
+        </table>
+    </form>
+}
+else
+{
+    <p> Već ste se prijavili! </p>
+    <p>[<a href="~/Register/SignOff">Odjavi se</a>]</p>
+}
+    <p>[<a href="~/Home/Index">Povratak na pocetnu stranicu</a>]</p>

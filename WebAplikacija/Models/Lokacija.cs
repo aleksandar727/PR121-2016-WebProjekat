@@ -13,7 +13,7 @@ namespace WebAplikacija.Models
 
         public override string ToString() // Sirina pa Duzina
         {
-            return $"{Adresa.ToString()}{GeografskaSirina}, {GeografskaDuzina}";
+            return $"{Adresa.ToString()} {GeografskaSirina} {GeografskaDuzina}";
         }
     }
 }
