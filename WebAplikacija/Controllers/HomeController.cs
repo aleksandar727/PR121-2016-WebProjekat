@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAplikacija.Models;
 
 namespace WebAplikacija.Controllers
 {
@@ -10,6 +11,15 @@ namespace WebAplikacija.Controllers
     {
         public ActionResult Index()
         {
+            Korisnik korisnik = (Korisnik)Session["Korisnik"];
+            if (korisnik == null)
+            {
+                korisnik = new Korisnik();
+                Session["Korisnik"] = korisnik;
+            }
+
+            ViewBag.Korisnik = korisnik;
+
             return View();
         }
 

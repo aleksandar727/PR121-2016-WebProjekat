@@ -9,14 +9,16 @@
     <p>
         Uspešno ste se prijavili:<br />
         Username: <b>@ViewBag.Korisnik.KorisnickoIme</b><br />
+        Uloga: <b>@ViewBag.Korisnik.UlogaKorisnika </b><br/>
         LoggingDate: <b>@ViewBag.Korisnik.LoggingDate</b><br />
     </p>
-    <a href="~/Register/SignOff"> Odjavi se</a><br />
+    <a href="~/Login/SignOff"> Odjavi se</a><br />
 }
 else
 {
+    <h2>Niste se uspešno prijavili!</h2>
     <p>
-        Niste se uspešno prijavili!<br />
+        
         @ViewBag.Message
     </p>
 }

@@ -45,6 +45,7 @@ namespace WebAplikacija.Controllers
                     DateTime TryDate;
                     DateTime.TryParse(Request["LoggingDate"], out TryDate);
                     korisnik.LoggingDate = TryDate;
+                    Korisnici.dictionaryKorisnici.Add(korisnik.KorisnickoIme, korisnik);
                 }
                 else
                 {
@@ -52,17 +53,12 @@ namespace WebAplikacija.Controllers
                 }
                 
             }
+
+            Session["Korisnik"] = korisnik;
             ViewBag.Korisnik = korisnik;
             return View("Result");
         }
 
-        public ActionResult SignOff()
-        {
-            Session.Abandon();
-            Korisnik korisnik = new Korisnik();
-            Session["Korisnik"] = korisnik;
-            ViewBag.Korisnik = korisnik;
-            return View("Index");
-        }
+        
     }
 }

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Moj profil</h2>
+<form action="~/MojProfil/Izmena" method="post" style="margin-bottom:10px">
+    <input type="hidden" name="LoggingDate" value="@DateTime.Now">
+    <table cellspacing=2 cellpadding=3 border=0>
+        <tr>
+            <td align=left>Ime:  </td>
+            <td>&nbsp;</td>
+            <td><b>@ViewBag.Korisnik.Ime</b></td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="Ime"></td>
+        </tr>
+        <tr>
+            <td align=left>Prezime:  </td>
+            <td>&nbsp;</td>
+            <td><b>@ViewBag.Korisnik.Prezime</b></td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="Prezime"></td>
+        </tr>
+        <tr>
+            <td align=left>Korisnicko ime:  </td>
+            <td>&nbsp;</td>
+            <td><b>@ViewBag.Korisnik.KorisnickoIme</b></td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="KorisnickoIme"></td>
+        </tr>
+        <tr>
+            <td align=left>Lozinka:  </td>
+            <td>&nbsp;</td>
+            <td><b>@ViewBag.Korisnik.Lozinka</b></td>
+            <td>&nbsp;</td>
+            <td><input type="password" name="Lozinka"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td align=left>&nbsp;  </td>
+            <td align=left>&nbsp;  </td>
+            <td align=left>&nbsp;  </td>
+            <td><input style="position:center" type="submit" value=" Izmeni! "></td>
+        </tr>
+    </table>
+</form>
+

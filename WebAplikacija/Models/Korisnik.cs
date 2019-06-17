@@ -17,7 +17,7 @@ namespace WebAplikacija.Models
         public List<Apartman> Apartmani { get; set; }
         public List<Apartman> Rezervacije { get; set; }
 
-        public bool LoggedIn { get; set; }
+        public bool LoggedIn { get; set; } = false;
         public DateTime LoggingDate { get; set; }
         #endregion
 

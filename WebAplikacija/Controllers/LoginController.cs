@@ -45,6 +45,7 @@ namespace WebAplikacija.Controllers
                         DateTime TryDate;
                         DateTime.TryParse(Request["LoggingDate"], out TryDate);
                         korisnik.LoggingDate = TryDate;
+                        
                     }
                     else
                         ViewBag.Message = "Pogresno korisnicko ime ili lozinka";
@@ -55,8 +56,18 @@ namespace WebAplikacija.Controllers
             else
                 ViewBag.Message = "Niste popunili polja!";
 
+            Session["Korisnik"] = korisnik;
             ViewBag.Korisnik = korisnik;
             return View("Result");
+        }
+
+        public ActionResult SignOff()
+        {
+            Session.Abandon();
+            Korisnik korisnik = new Korisnik();
+            Session["Korisnik"] = korisnik;
+            ViewBag.Korisnik = korisnik;
+            return View("~/Views/Home/Index.cshtml");
         }
     }
 }

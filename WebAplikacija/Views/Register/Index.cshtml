@@ -3,9 +3,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Register forma</h2>
+
 @if (ViewBag.Korisnik.LoggedIn == false)
 {
+    <h2>Register forma</h2>
     <form action="~/Register/Register" method="post">
         <input type="hidden" name="LoggingDate" value="@DateTime.Now">
         <table cellspacing=0 cellpadding=3 border=0>
@@ -34,7 +35,7 @@
 }
 else
 {
-    <p> Već ste se prijavili! </p>
-    <p>[<a href="~/Register/SignOff">Odjavi se</a>]</p>
+    <h2> Već ste se prijavili! </h2>
+    <p>[<a href="~/Login/SignOff">Odjavi se</a>]</p>
 }
-    <p>[<a href="~/Home/Index">Povratak na pocetnu stranicu</a>]</p>
+Kliknite <a href="~/Home">ovde</a> za povratak na pocetnu stranicu.<br />
