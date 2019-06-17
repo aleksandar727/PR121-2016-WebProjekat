@@ -19,6 +19,10 @@ namespace WebAplikacija.Controllers
                 korisnik = new Korisnik();
                 Session["Korisnik"] = korisnik;
             }
+            if(!korisnik.LoggedIn)
+            {
+                return View("Greska");
+            }
 
             ViewBag.Korisnik = korisnik;
 
@@ -35,7 +39,7 @@ namespace WebAplikacija.Controllers
                 Session["Korisnik"] = korisnik;
             }
 
-            if(!string.IsNullOrEmpty(Request["Ime"]))
+            if (!string.IsNullOrEmpty(Request["Ime"]))
             {
                 Korisnici.dictionaryKorisnici[korisnik.KorisnickoIme].Ime = Request["Ime"];
             }
@@ -77,14 +81,53 @@ namespace WebAplikacija.Controllers
 
             List<Korisnik> listajKorisnikeList = new List<Korisnik>();
             var listajKorisnike = Korisnici.dictionaryKorisnici.Values.ToArray();
-            Array.Sort(listajKorisnike, (x,y) => String.Compare(x.UlogaKorisnika.ToString(), y.UlogaKorisnika.ToString()));
+            Array.Sort(listajKorisnike, (x, y) => String.Compare(x.UlogaKorisnika.ToString(), y.UlogaKorisnika.ToString()));
 
             listajKorisnikeList = listajKorisnike.ToList();
 
             ViewBag.ListajKorisnikeList = listajKorisnikeList;
             ViewBag.Korisnik = korisnik;
+            List<string> ulogeKorisnika = new List<string>() { "Administrator", "Domacin", "Gost" };
+            ViewBag.UlogeKorisnika = ulogeKorisnika;
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult MenjajUlogu()
+        {
+            Korisnik korisnik = (Korisnik)Session["Korisnik"];
+            if (korisnik == null)
+            {
+                korisnik = new Korisnik();
+                Session["Korisnik"] = korisnik;
+            }
+
+            string prikupljeniPodaci = Request["UlogaKorisnika"];
+            string[] splitovaniPodaci = prikupljeniPodaci.Split(',');
+            int i = 0;
+            foreach (var s in Korisnici.dictionaryKorisnici.Values)
+            {
+                if (!s.UlogaKorisnika.ToString().Equals(splitovaniPodaci[i]))
+                {
+                    Enum.TryParse(splitovaniPodaci[i], out UlogaKorisnika ulogaKorisnika);
+                    s.UlogaKorisnika = ulogaKorisnika;
+                }
+                i++;
+            }
+
+            List<Korisnik> listajKorisnikeList = new List<Korisnik>();
+            var listajKorisnike = Korisnici.dictionaryKorisnici.Values.ToArray();
+            Array.Sort(listajKorisnike, (x, y) => String.Compare(x.UlogaKorisnika.ToString(), y.UlogaKorisnika.ToString()));
+
+            listajKorisnikeList = listajKorisnike.ToList();
+
+            ViewBag.ListajKorisnikeList = listajKorisnikeList;
+            ViewBag.Korisnik = korisnik;
+            List<string> ulogeKorisnika = new List<string>() { "Administrator", "Domacin", "Gost" };
+            ViewBag.UlogeKorisnika = ulogeKorisnika;
+
+            return View("ListajKorisnike");
         }
     }
 }
