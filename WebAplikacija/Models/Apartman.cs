@@ -20,7 +20,7 @@ namespace WebAplikacija.Models
         public List<DateTime> DostupnostPoDatumima { get; set; }
         public Korisnik Domacin { get; set; }
         public List<KomentarZaApartman> KomentariGostiju { get; set; }
-        public List<Image> SlikeApartmana { get; set; }
+        public List<UploadedFile> SlikeApartmana { get; set; }
         public double CenaPoNoci { get; set; }
         public string VremeZaPrijavu { get; set; } = "2 PM";
         public string VremeZaOdjavu { get; set; } = "10 AM";
@@ -30,14 +30,29 @@ namespace WebAplikacija.Models
         #endregion
 
         #region Constructors
-        /*public Apartman(string TipApartmana, int BrojSoba, int BrojGostiju, ) // Slozene tipove posebno
+        public Apartman()
         {
+            this.TipApartmana = "";
+            this.BrojSoba = 0;
+            this.BrojGostiju = 0;
+            this.Lokacija = new Lokacija();
+            this.DatumiZaIzdavanje = new List<DateTime>();
+            this.DostupnostPoDatumima = new List<DateTime>();
+            this.Domacin = new Korisnik();
+            this.KomentariGostiju = new List<KomentarZaApartman>();
+            this.SlikeApartmana = new List<UploadedFile>();
+            this.CenaPoNoci = 0;
+            this.VremeZaPrijavu = "2 AM";
+            this.VremeZaOdjavu = "10 AM";
+            this.Status = Status.Neaktivno;
+            this.ListaSadrzajaApartmana = new List<SadrzajApartmana>();
+            this.Rezervacije = new List<Rezervacija>();
 
-        }*/
+        }
         #endregion
 
         #region Methods
-        public override string ToString()
+        /*public override string ToString()
         {
             string imageAsString = "";
             foreach(var s in SlikeApartmana)
@@ -54,7 +69,7 @@ namespace WebAplikacija.Models
             return $"{TipApartmana} {BrojSoba} {BrojGostiju} |{Lokacija}| ~{ExtensionMethods.ExtendedToString(DatumiZaIzdavanje)}~ ~{ExtensionMethods.ExtendedToString(DostupnostPoDatumima)}~ ~{Domacin}~ " +
                 $"~{ExtensionMethods.ExtendedToString(KomentariGostiju)}~ ~{imageAsString}~ {CenaPoNoci} {VremeZaPrijavu} {VremeZaOdjavu} {Status} ~{ExtensionMethods.ExtendedToString(ListaSadrzajaApartmana)}~ " +
                 $"~{ExtensionMethods.ExtendedToString(Rezervacije)}~";
-        }
+        }*/
 
         
         #endregion  

@@ -134,6 +134,7 @@
     <Compile Include="Models\Lokacija.cs" />
     <Compile Include="Models\PomocneKlase\ExtensionMethods.cs" />
     <Compile Include="Models\PomocneKlase\Korisnici.cs" />
+    <Compile Include="Models\PomocneKlase\UploadedFile.cs" />
     <Compile Include="Models\Rezervacija.cs" />
     <Compile Include="Models\SadrzajApartmana.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,19 +149,47 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Autocomplete\auto-complete.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Chosen\chosen.css" />
+    <Content Include="Scripts\Chosen\chosen.jquery.js" />
+    <Content Include="Scripts\Chosen\prism.css" />
+    <Content Include="Scripts\DatePickerCss\datepicker.css" />
+    <Content Include="Scripts\DatePickerCss\datepicker.min.css" />
+    <Content Include="Scripts\DatePickerJs\datepicker.cs.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.da.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.de.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.en.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.es.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.fi.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.fr.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.hu.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.min.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.nl.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.pl.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.pt-BR.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.pt.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.ro.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.sk.js" />
+    <Content Include="Scripts\DatePickerJs\datepicker.zh.js" />
+    <Content Include="Scripts\font-awesome.min.css" />
+    <Content Include="Scripts\fontawesome.min.css" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-migrate-3.0.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PlacePicker.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -168,7 +197,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -181,8 +212,12 @@
     <Content Include="Views\MojProfil\Index.cshtml" />
     <Content Include="Views\MojProfil\ListajKorisnike.cshtml" />
     <Content Include="Views\MojProfil\Greska.cshtml" />
+    <Content Include="Views\MojProfil\ListajApartmane.cshtml" />
+    <Content Include="Views\MojProfil\DodajNoviApartman.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Images\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,245 @@
+﻿<script src="~/Scripts/Autocomplete/auto-complete.js"></script>
+@{
+    ViewBag.Title = "DodajNoviApartman";
+}
+
+@if (ViewBag.Korisnik != null)
+{
+    if (ViewBag.Korisnik.IsDomacin())
+    {
+        <h2>Unesite nov apartman: </h2>
+        <form action="~/MojProfil/DodajNoviApartman" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="LoggingDate" value="@DateTime.Now">
+            <table cellspacing=0 cellpadding=3 border=0>
+                <tr>
+                    <td align=left>Tip apartmana:    </td>
+                    <td><input type="text" name="TipApartmana"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageTipApartmana</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Broj soba:    </td>
+                    <td><input type="text" name="BrojSoba"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageBrojSoba</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Broj gostiju:    </td>
+                    <td><input type="text" name="BrojGostiju"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageBrojGostiju</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Lokacija:    </td>                    
+                    <td>
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+                        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+                        <style type="text/css">
+                            .address {
+                                cursor: pointer
+                            }
+                                .address:hover {
+                                    color: #AA0000;
+                                    text-decoration: underline
+                                }
+                        </style>
+
+                        <input type="hidden" name="lat" id="lat" size=12 value="">
+                        <input type="hidden" name="lon" id="lon" size=12 value="">
+
+                        <div id="search">
+                            <input type="text" name="addr" list="lokacijeList" style="width:179px" value="" id="addr" size="58" onkeypress="addr_search();" />
+                            <div id="results"></div>
+                        </div>
+                        <div style="display:none" id="map"></div>
+
+                        <script type="text/javascript">
+
+                            
+                            var startlat = 0;
+                            var startlon = 0;
+
+                            var options = {
+                                center: [startlat, startlon],
+                                zoom: 9
+                            }
+
+                            document.getElementById('lat').value = startlat;
+                            document.getElementById('lon').value = startlon;
+
+                            var map = L.map('map', options);
+                            var nzoom = 12;
+
+                            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: 'OSM' }).addTo(map);
+
+                            var myMarker = L.marker([startlat, startlon], { title: "Coordinates", alt: "Coordinates", draggable: true }).addTo(map).on('dragend', function () {
+                                var lat = myMarker.getLatLng().lat.toFixed(8);
+                                var lon = myMarker.getLatLng().lng.toFixed(8);
+                                var czoom = map.getZoom();
+                                if (czoom < 18) { nzoom = czoom + 2; }
+                                if (nzoom > 18) { nzoom = 18; }
+                                if (czoom != 18) { map.setView([lat, lon], nzoom); } else { map.setView([lat, lon]); }
+                                document.getElementById('lat').value = lat;
+                                document.getElementById('lon').value = lon;
+                                myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+                            });
+
+                            function chooseAddr(lat1, lng1, address) {
+                                myMarker.closePopup();
+                                map.setView([lat1, lng1], 18);
+                                myMarker.setLatLng([lat1, lng1]);
+                                lat = lat1.toFixed(8);
+                                lon = lng1.toFixed(8);
+                                document.getElementById('lat').value = lat;
+                                document.getElementById('lon').value = lon;
+                                // ovde postavi
+                                myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+                                
+                                document.getElementById('results').innerHTML = "";    
+                                document.getElementById('addr').value = address;
+                            }
+
+                            function myFunction(arr) {
+                                var out = "<br />";
+                                //var i;
+                                
+                                if (arr.length > 0) {
+                                    for (i = 0; i < arr.length; i++) {
+                                        
+                                        out += "<div class='address' title='Izaberi' onclick='chooseAddr(" + arr[i].lat + ", " + arr[i].lon + ",\"" + arr[i].display_name + "\");return false;'>" + arr[i].display_name + "</div>";
+                                        
+                                    }
+                                    //out += "</datalist>";
+                                    document.getElementById('results').innerHTML = out;
+
+                                }
+                                else {
+                                    document.getElementById('results').innerHTML = "Nismo nasli...";
+                                }
+
+                            }
+
+                            function addr_search() {
+                                
+                                var inp = document.getElementById("addr");
+                                var xmlhttp = new XMLHttpRequest();
+                                var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp.value;
+                                xmlhttp.onreadystatechange = function () {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        var myArr = JSON.parse(this.responseText);
+                                        myFunction(myArr);
+                                    }
+                                };
+                                xmlhttp.open("GET", url, true);
+                                xmlhttp.send();
+                            }
+
+                            
+
+                        </script>
+                    </td>
+                    <td><font color="red">@ViewBag.ErrorMessageLokacija</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Datumi za izdavanje:    </td>
+                    <td>
+                        <input type="text"
+                               data-range="true"
+                               data-multiple-dates-separator=" - "
+                               data-language="en"
+                               class="datepicker-here"
+                               name="DatumiZaIzdavanje" />
+                    </td>
+                    <td><font color="red">@ViewBag.ErrorMessageDatumiZaIzdavanje</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Cena po noci:    </td>
+                    <td><input type="text" name="CenaPoNoci"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageCenaPoNoci</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Vreme za prijavu:    </td>
+                    <td><input type="text" name="VremeZaPrijavu"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageVremeZaPrijavu</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Vreme za odjavu:    </td>
+                    <td><input type="text" name="VremeZaOdjavu"></td>
+                    <td><font color="red">@ViewBag.ErrorMessageVremeZaOdjavu</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Sadrzaji:    </td>
+                    <td>
+                        <select name="ListaSadrzajaApartmana" class="chosen-select" multiple="" data-placeholder="Izaberite sadrzaj/e" tabindex="-1" style="width:179px">
+                            <option value=""></option>
+                            <optgroup label="Basic">
+                                <option value="Basic;Wifi">Wifi</option>
+                                <option value="Basic;Laptop friendly workspace">Laptop friendly workspace</option>
+                                <option value="Basic;Cable TV">Cable TV</option>
+                                <option value="Basic;Washer">Washer</option>
+                                <option value="Basic;Air conditioning">Air conditioning</option>
+                                <option value="Basic;Heating">Heating</option>
+                            </optgroup>
+                            <optgroup label="Family features">
+                                <option value="Family features;Crib">Crib</option>
+                                <option value="Family features;High chair">High chair</option>
+                                <option value="Family features;Window gurads">Window gurads</option>
+                                <option value="Family features;Room-darkening shades">Room-darkening shades</option>
+                                <option value="Family features;Pack'n Play">Pack'n Play</option>
+                                <option value="Family features;Led lights">Led lights</option>
+                            </optgroup>
+                            <optgroup label="Facilities">
+                                <option value="Facilities;Elevator">Elevator</option>
+                                <option value="Facilities;Single level home">Single level home</option>
+                                <option value="Facilities;Underground parking">Underground parking</option>
+                                <option value="Facilities;Paid parking off premises">Paid parking off premises</option>
+                                <option value="Facilities;Free street parking">Free street parking</option>
+                                <option value="Facilities;Park/Garden">Park/Garden</option>
+
+                            </optgroup>
+                            <optgroup label="Dining">
+                                <option value="Dining;Kitchen">Kitchen</option>
+                                <option value="Dining;Coffee maker">Coffee maker</option>
+                                <option value="Dining;Cooking basics">Cooking basics</option>
+                                <option value="Dining;Dishes and silverware">Dishes and silverware</option>
+                                <option value="Dining;Microwave">Microwave</option>
+                                <option value="Dining;Refrigerator">Refrigerator</option>
+                            </optgroup>
+                            <optgroup label="Relaxation and Wellness">
+                                <option value="Relaxation and Wellness;Massage therapy">Massage therapy</option>
+                                <option value="Relaxation and Wellness;Covered pool">Covered pool</option>
+                                <option value="Relaxation and Wellness;Hot stone massage">Hot stone massage</option>
+                                <option value="Relaxation and Wellness;Swedish massage">Swedish massage</option>
+                                <option value="Relaxation and Wellness;Thai yoga">Thai yoga</option>
+                                <option value="Relaxation and Wellness;Therapeutic touch">Therapeutic touch</option>
+                            </optgroup>
+                        </select>
+                    </td>
+                    <td><font color="red">@ViewBag.ErrorMessageListaSadrzajaApartmana</font></td>
+                </tr>
+                <tr>
+                    <td align=left>Izaberite slike:    </td>
+                    <td><input type="file" name="SlikeApartmana" multiple></td>
+                    <td><font color="red">@ViewBag.ErrorMessageImages</font></td>
+                </tr>
+                <tr>
+                    <td align=left>&nbsp;  </td>
+                    <td><input type="submit" value=" Sacuvaj "></td>
+                </tr>
+            </table>
+        </form>
+    }
+}
+<!-- Date Picker ~/Scripts/DatePickerJs/datepicker.min.js---~/Scripts/DatePickerCss/datepicker.min.css---------------------------------------------------------------------------------------->
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Scripts/DatePickerCss/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="~/Scripts/DatePickerJs/datepicker.min.js"></script>
+<script src="~/Scripts/DatePickerJs/datepicker.en.js"></script>
+<!-- -------------------------------------------------------------------------------------------------------- -->
+<!-- Checkboxes inside list ----------------------- ~/Scripts/Chosen/chosen.jquery.js- ~/Scripts/Chosen/chosen.css------------------------------------------------------------>
+<script src="~/Scripts/Chosen/chosen.jquery.js"></script>
+<link href="~/Scripts/Chosen/chosen.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+    $(".chosen-select").chosen();
+</script>
+<!-- -------------------------------------------------------------------------------------------------------- -->
+<!-- Map for adressing --------------------------------------------------------jquery-3.3.1.js--------------------------------->
+<!-- -------------------------------------------------------------------------------------------------------- -->

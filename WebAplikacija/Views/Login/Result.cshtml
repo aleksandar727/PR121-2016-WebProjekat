@@ -3,14 +3,14 @@
     ViewBag.Title = "Result";
 }
 
-<h2>Uloguj se</h2>
+
 @if (ViewBag.Korisnik.LoggedIn)
 {
+    <h2>Uspešno ste se prijavili:</h2>
     <p>
-        Uspešno ste se prijavili:<br />
-        Username: <b>@ViewBag.Korisnik.KorisnickoIme</b><br />
-        Uloga: <b>@ViewBag.Korisnik.UlogaKorisnika </b><br/>
-        LoggingDate: <b>@ViewBag.Korisnik.LoggingDate</b><br />
+        Korisnicko ime: <b>@ViewBag.Korisnik.KorisnickoIme</b><br />
+        Uloga: <b>@ViewBag.Korisnik.UlogaKorisnika </b><br />
+        Vreme prijave: <b>@ViewBag.Korisnik.LoggingDate</b><br />
     </p>
     <a href="~/Login/SignOff"> Odjavi se</a><br />
 }
@@ -18,11 +18,11 @@ else
 {
     <h2>Niste se uspešno prijavili!</h2>
     <p>
-        
+
         @ViewBag.Message
     </p>
 }
-
+Kliknite <a href="~/Login">ovde</a> za povratak na login stranicu.<br />
 Kliknite <a href="~/Register">ovde</a> za povratak na register stranicu.<br />
 Kliknite <a href="~/Home">ovde</a> za povratak na pocetnu stranicu.<br />
 

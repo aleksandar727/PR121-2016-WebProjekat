@@ -43,14 +43,51 @@
                     {
                         if (ViewBag.Korisnik.LoggedIn)
                         {
-                            <li><a href="~/MojProfil/Index">Moj Profil</a></li>
-                            if (ViewBag.Korisnik.IsAdmin())
+
+
+
+
+                            switch (ViewBag.Korisnik.UlogaKorisnika.ToString())
                             {
-                                <li><a href="~/MojProfil/ListajKorisnike">Svi korisnici</a></li>
-                            }
+                                case "Gost": // Gost
+                                    <li class="dropdown">
+                                        <a href="~/MojProfil/Index" class="dropdown" data-toggle="dropdown">Gost<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/MojProfil/Index">Moj Profil</a></li>
+                                            
+
+                                        </ul>
+                                    </li>
+                                    break;
+
+                                case "Administrator":
+
+                                    <li class="dropdown">
+                                        <a href="~/MojProfil/Index" class="dropdown" data-toggle="dropdown">Administrator<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/MojProfil/Index">Moj Profil</a></li>
+                                            <li><a href="~/MojProfil/ListajKorisnike">Svi korisnici</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    break; // Administrator
+
+                                case "Domacin":
+                                    <li class="dropdown">
+                                        <a href="~/MojProfil/Index" class="dropdown" data-toggle="dropdown">Domacin<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="~/MojProfil/Index">Moj Profil</a></li>
+                                            <li><a href="~/MojProfil/ListajApartmane">Moji apartmani</a></li>
+                                            <li><a href="~/MojProfil/DodajApartman">Dodaj novi apartman</a></li>
+                                            
+                                        </ul>
+                                    </li>
+                                    break; // Domacin
+                            };
+
                             <li><a href="~/Login/SignOff">Odjavi se</a></li>
                         }
-
                     }
                 </ul>
             </div>

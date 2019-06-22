@@ -5,40 +5,38 @@
 {
     <h2>Svi korisnici: </h2>
     <form action="~/MojProfil/MenjajUlogu" method="post">
-        <table cellspacing=2 cellpadding=3 border=0>
+        <table cellspacing=5 cellpadding=5 border=0>
+            <tr>
+                <td align=left><b>Korisnik:</b>  </td>
+                <td align=left>Uloga:  </td>
+                <td align=left>Ime:  </td>
+                <td align=left>Prezime:  </td>
+                <td align=left>Korisnicko ime:  </td>
+                <td align=left>Lozinka:  </td>
+                <td align=left>Uloge</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
             @foreach (var k in ViewBag.ListajKorisnikeList)
             {
                 <tr>
-                    <td align=left><b>Korisnik:</b>  </td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-
-                    <td align=left>Uloga:  </td>
-                    <td>&nbsp;</td>
+                    <td align=left><b>&nbsp;</b>  </td>                 
                     <td><b>@k.UlogaKorisnika</b></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-
-                    <td align=left>Ime:  </td>
-                    <td>&nbsp;</td>
                     <td><b>@k.Ime</b></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    
 
-                    <td align=left>Prezime:  </td>
-                    <td>&nbsp;</td>
+                    
+                    
                     <td><b>@k.Prezime</b></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    
 
-                    <td align=left>Korisnicko ime:  </td>
-                    <td>&nbsp;</td>
+                    
+                    
                     <td><b>@k.KorisnickoIme</b></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    
 
-                    <td align=left>Lozinka:  </td>
-                    <td>&nbsp;</td>
+                    
+                    
                     <td><b>@k.Lozinka</b></td>
 
                     <td align=left>Izmeni ulogu:  </td>

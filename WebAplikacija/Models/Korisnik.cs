@@ -15,7 +15,7 @@ namespace WebAplikacija.Models
         public string Prezime { get; set; }
         public UlogaKorisnika UlogaKorisnika { get; set; }
         public List<Apartman> Apartmani { get; set; }
-        public List<Apartman> Rezervacije { get; set; }
+        public List<Rezervacija> Rezervacije { get; set; }
 
         public bool LoggedIn { get; set; } = false;
         public DateTime LoggingDate { get; set; }
@@ -29,12 +29,12 @@ namespace WebAplikacija.Models
             this.Lozinka = "";
             this.Ime = "";
             this.Prezime = "";
-            this.LoggingDate = DateTime.Now;
+            //this.LoggingDate = DateTime.Now;
             this.Apartmani = new List<Apartman>();
-            this.Rezervacije = new List<Apartman>();
+            this.Rezervacije = new List<Rezervacija>();
             this.LoggedIn = false;
         }
-        public Korisnik(string KorisnickoIme, string Lozinka, string Ime, string Prezime, UlogaKorisnika UlogaKorisnika, List<Apartman> Apartmani, List<Apartman> Rezervacije) : this()
+        public Korisnik(string KorisnickoIme, string Lozinka, string Ime, string Prezime, UlogaKorisnika UlogaKorisnika, List<Apartman> Apartmani, List<Rezervacija> Rezervacije) : this()
         {
             this.KorisnickoIme = KorisnickoIme;
             this.Lozinka = Lozinka;
@@ -53,7 +53,7 @@ namespace WebAplikacija.Models
             this.Ime = Ime;
             this.Prezime = Prezime;
             this.Apartmani = new List<Apartman>();
-            this.Rezervacije = new List<Apartman>();
+            this.Rezervacije = new List<Rezervacija>();
             this.LoggedIn = false;
         }
         #endregion
@@ -73,6 +73,16 @@ namespace WebAplikacija.Models
         {
             return UlogaKorisnika == UlogaKorisnika.Administrator;
         }
+
+        public bool IsDomacin()
+        {
+            return UlogaKorisnika == UlogaKorisnika.Domacin;
+        }
+
+        public bool IsGost()
+        {
+            return UlogaKorisnika == UlogaKorisnika.Gost;
+        }
         
 
         public override string ToString()
@@ -86,6 +96,6 @@ namespace WebAplikacija.Models
     {
         Gost,
         Administrator,
-        Domacin
+        Domacin 
     }
 }

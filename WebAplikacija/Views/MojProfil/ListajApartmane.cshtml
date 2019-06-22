@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ListajApartmane";
+}
+
+@if (ViewBag.Korisnik.LoggedIn == true)
+{
+    <h2>Aparmani</h2>
+    <table>
+        <tr>
+            <td>Tip apartmana</td>
+            <td>Broj soba</td>
+            <td>Broj gostiju</td>
+            <td>Lokacija</td>
+            <td>Cena po noci</td>
+            <td>Status</td>
+        </tr>
+        @foreach (var s in ViewBag.Apartmani)
+        {
+            <tr>
+                <td>@s.TipApartmana</td>
+                <td>@s.BrojSoba</td>
+                <td>@s.BrojGostiju</td>
+                <td>@s.Lokacija</td>
+                <td>@s.CenaPoNoci</td>
+                <td>@s.Status</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <table>
+        <tr>
+            <td>
+                <img /> <!-- SLIKU DODAJ -->
+            </td>
+
+            <td>
+                <tr></tr> <!-- PRAZAN -->
+                <tr></tr> <!-- TIP APARTMANA -->
+                <tr></tr> <!-- Lokacija-->
+                <tr></tr> <!-- Domacin-->
+                <tr></tr> <!-- Status, vreme za prijavu, vreme za odjavu-->
+                <tr></tr> <!-- Broj soba, broj gostiju, cena-->
+            </td>
+
+        </tr>
+
+    </table>
+
+
+
+}
+

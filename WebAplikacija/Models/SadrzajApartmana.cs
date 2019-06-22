@@ -13,7 +13,11 @@ namespace WebAplikacija.Models
         #endregion
 
         #region Constructors
-        public SadrzajApartmana() { }
+        public SadrzajApartmana()
+        {
+            this.Id = 0;
+            this.NazivSadrzaja = "";
+        }
 
         public SadrzajApartmana(int Id, string NazivSadrzaja)
         {

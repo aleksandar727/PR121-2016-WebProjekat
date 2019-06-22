@@ -15,7 +15,13 @@ namespace WebAplikacija.Models
         #endregion
 
         #region Constructors
-        public KomentarZaApartman() { }
+        public KomentarZaApartman()
+        {
+            this.GostKojiJeOstavioKomentar = new Korisnik();
+            this.ApartmanNaKojiSeOdnosiKomentar = new Apartman();
+            this.Tekst = "";
+            this.OcenaZaApartman = 0;
+        }
         public KomentarZaApartman(Korisnik GostKojiJeOstavioKomentar, Apartman ApartmanNaKojiSeOdnosiKomentar, string Tekst, double OcenaZaApartman)
         {
             this.GostKojiJeOstavioKomentar = GostKojiJeOstavioKomentar;
