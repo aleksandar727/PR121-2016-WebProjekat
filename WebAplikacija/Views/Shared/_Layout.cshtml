@@ -16,11 +16,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ApartMax", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ApartMax", "ListajApartmane", "MojProfil", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Pocetna", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Pocetna", "ListajApartmane", "MojProfil")</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
@@ -54,7 +54,7 @@
                                         <a href="~/MojProfil/Index" class="dropdown" data-toggle="dropdown">Gost<b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="~/MojProfil/Index">Moj Profil</a></li>
-                                            
+                                            <li><a href="~/MojProfil/ListajApartmane">Svi apartmani</a></li>
 
                                         </ul>
                                     </li>
@@ -67,7 +67,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="~/MojProfil/Index">Moj Profil</a></li>
                                             <li><a href="~/MojProfil/ListajKorisnike">Svi korisnici</a></li>
-
+                                            <li><a href="~/MojProfil/ListajApartmane">Svi apartmani</a></li>
                                         </ul>
                                     </li>
 
@@ -80,7 +80,6 @@
                                             <li><a href="~/MojProfil/Index">Moj Profil</a></li>
                                             <li><a href="~/MojProfil/ListajApartmane">Moji apartmani</a></li>
                                             <li><a href="~/MojProfil/DodajApartman">Dodaj novi apartman</a></li>
-                                            
                                         </ul>
                                     </li>
                                     break; // Domacin

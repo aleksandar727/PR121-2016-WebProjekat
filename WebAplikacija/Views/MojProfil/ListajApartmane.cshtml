@@ -1,55 +1,64 @@
-﻿
+﻿@model IEnumerable<WebAplikacija.Models.Apartman>
+
 @{
     ViewBag.Title = "ListajApartmane";
 }
+<style>    
+    td {white-space: pre}
+    a { color:black}
+</style>
 
-@if (ViewBag.Korisnik.LoggedIn == true)
+<h2>Apartmani</h2>
+
+@if (Model.Count() > 0)
 {
-    <h2>Aparmani</h2>
     <table>
-        <tr>
-            <td>Tip apartmana</td>
-            <td>Broj soba</td>
-            <td>Broj gostiju</td>
-            <td>Lokacija</td>
-            <td>Cena po noci</td>
-            <td>Status</td>
-        </tr>
-        @foreach (var s in ViewBag.Apartmani)
+        @foreach (var s in Model)
         {
-            <tr>
-                <td>@s.TipApartmana</td>
-                <td>@s.BrojSoba</td>
-                <td>@s.BrojGostiju</td>
-                <td>@s.Lokacija</td>
-                <td>@s.CenaPoNoci</td>
-                <td>@s.Status</td>
-            </tr>
+        <tr>
+            <td><img src="~/Images/@s.SlikeApartmana.FirstOrDefault().name" onclick="location.href='Detalji'" height="70" width="70" /></td> <!-- Jedna slika -->
+            <td>&nbsp;</td>
+            <td>
+                <a href="~/MojProfil/Detalji">@s.TipApartmana, @s.Lokacija.Adresa.NaseljenoMesto</a>
+                @s.Lokacija.Adresa.Ulica @s.Lokacija.Adresa.Broj
+                @s.Lokacija.Adresa.NaseljenoMesto @s.Lokacija.Adresa.PostarinskiBroj
+                 @s.Lokacija.GeografskaSirina, @s.Lokacija.GeografskaDuzina
+            </td>
+            <td>&nbsp;</td>
+            
+            <!-- OPIS -->
+            <td>
+                Broj soba: @s.BrojSoba, Broj gostiju: @s.BrojGostiju
+                Datumi za izdavanje: @s.DatumiZaIzdavanje.FirstOrDefault() - @s.DatumiZaIzdavanje.LastOrDefault()
+
+
+            </td>
+            <td>
+                Vreme za prijavu: @s.VremeZaPrijavu
+                Vreme za odjavu: @s.VremeZaOdjavu
+
+
+            </td>
+            <td>
+                Cena: @s.CenaPoNoci
+                Status: @s.Status
+
+
+            </td>
+        </tr>
+
+
+            
         }
     </table>
 }
 else
 {
-    <table>
-        <tr>
-            <td>
-                <img /> <!-- SLIKU DODAJ -->
-            </td>
-
-            <td>
-                <tr></tr> <!-- PRAZAN -->
-                <tr></tr> <!-- TIP APARTMANA -->
-                <tr></tr> <!-- Lokacija-->
-                <tr></tr> <!-- Domacin-->
-                <tr></tr> <!-- Status, vreme za prijavu, vreme za odjavu-->
-                <tr></tr> <!-- Broj soba, broj gostiju, cena-->
-            </td>
-
-        </tr>
-
-    </table>
-
-
-
+    <p>Nema dostupnih apartmana.</p>
 }
+
+
+
+
+
 

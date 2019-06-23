@@ -152,16 +152,35 @@ namespace WebAplikacija.Controllers
                 Session["Korisnik"] = korisnik;
             }
 
-            if (korisnik.UlogaKorisnika == UlogaKorisnika.Gost)
-                return View("Greska");
+            /*if (korisnik.UlogaKorisnika == UlogaKorisnika.Gost)
+                return View("Greska");*/
+            List<Apartman> apartmani = new List<Apartman>();
 
-            ViewBag.Apartmani = korisnik.Apartmani;
-            ViewBag.Rezervacije = korisnik.Rezervacije;
+            foreach(var Korisnik in Korisnici.dictionaryKorisnici.Values)
+            {
+                if(Korisnik.UlogaKorisnika == UlogaKorisnika.Domacin)
+                {
+                    foreach(var Apartman in Korisnik.Apartmani)
+                    {
+                        apartmani.Add(Apartman);
+                        
+                    }
+                }
+            }
+            
+           
+            //ViewBag.Apartmani = apartmani;
+            //ViewBag.Rezervacije = korisnik.Rezervacije;
             ViewBag.Korisnik = korisnik;
-            return View("ListajApartmane");
+            return View(apartmani);
         }
 
-        public ActionResult DodajApartman()
+        public ActionResult Detalji()
+        {
+            return View();
+        }
+
+        public ActionResult DodajApartman() // Prikaz forme
         {
             Korisnik korisnik = (Korisnik)Session["Korisnik"];
             if (korisnik == null)
@@ -391,32 +410,37 @@ namespace WebAplikacija.Controllers
                     ErrorMessageCount++;
             }
 
-            if (Request.Files.Count > 0)
+            if(ErrorMessageCount == 0)
             {
-                for (int i = 0; i < Request.Files.Count; i++)
+                if (Request.Files.Count > 0)
                 {
-                    var file = Request.Files[i];
-
-                    if (file != null && file.ContentLength > 0)
+                    for (int i = 0; i < Request.Files.Count; i++)
                     {
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/App_Data/Images/"), fileName);
+                        var file = Request.Files[i];
 
-                        file.SaveAs(path);
-                        UploadedFile uf = new UploadedFile(fileName, path);
-                    }
-                    else
-                    {
-                        ViewBag.ErrorMessageImages = "Niste izabrali sliku/e.";
-                        ErrorMessageCount++;
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+
+                            file.SaveAs(path);
+                            UploadedFile uf = new UploadedFile(fileName, path);
+                            apartman.SlikeApartmana.Add(uf);
+                        }
+                        else
+                        {
+                            ViewBag.ErrorMessageImages = "Niste izabrali sliku/e.";
+                            ErrorMessageCount++;
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.ErrorMessageImages = "Niste izabrali sliku/e.";
+                    ErrorMessageCount++;
+                }
             }
-            else
-            {
-                ViewBag.ErrorMessageImages = "Niste izabrali sliku/e.";
-                ErrorMessageCount++;
-            }
+            
 
             if(ErrorMessageCount > 0)
             {
@@ -437,6 +461,6 @@ namespace WebAplikacija.Controllers
         {
             for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
                 yield return day;
-        }
+        } // Day iteration
     }
 }
