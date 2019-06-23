@@ -1,7 +1,72 @@
-﻿
+﻿@model WebAplikacija.Models.Apartman
+
 @{
     ViewBag.Title = "Detalji";
 }
+@if (Model != null)
+{
+    <h2>Detalji @Model.TipApartmana @Model.Lokacija.Adresa.NaseljenoMesto</h2>
 
-<h2>Detalji</h2>
+    <table>
+        <tr>
+            <td>Tip apartmana</td>
+            <td>Broj soba</td>
+            <td>Broj gostiju</td>
+            <td>Lokacija</td>
+            <td>Slobodni datumi</td>
+            <td>Vreme za prijavu</td>
+            <td>Vreme za odjavu</td>
+            <td>Sadrzaji apartmana</td>
+            <td>Cena po noci</td>
+            <td>Status</td>
+        </tr>
+        <tr>
+            <td>@Model.TipApartmana</td>
+            <td>@Model.BrojSoba</td>
+            <td>@Model.BrojGostiju</td>
+            <td>@Model.Lokacija</td>
+            <td>
+
+                @foreach (var s in Model.DatumiZaIzdavanje)
+                {
+                    @s
+                }
+            </td><!--Datumi-->
+            <td>@Model.VremeZaPrijavu</td>
+            <td>@Model.VremeZaOdjavu</td>
+            <td>
+                @foreach (var s in Model.ListaSadrzajaApartmana)
+                {
+                    @s.NazivSadrzaja
+                }
+            </td> <!--Sadrzaji apartmana-->
+            <td>@Model.CenaPoNoci</td>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>
+            @foreach (var s in Model.SlikeApartmana)
+            {
+                <td>
+                    <img src="~/Images/@s.name" height="70" width="70">
+                </td>
+            }
+        </tr>
+
+    </table>
+    <h3>Komentari gostiju</h3>
+    <table>
+        @foreach (var s in Model.KomentariGostiju)
+        {
+            <tr>
+                <td>s</td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h1>Oooops.. Model = null</h1>
+}
 

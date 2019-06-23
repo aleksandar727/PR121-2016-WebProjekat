@@ -213,8 +213,8 @@
     <Content Include="Views\MojProfil\ListajKorisnike.cshtml" />
     <Content Include="Views\MojProfil\Greska.cshtml" />
     <Content Include="Views\MojProfil\DodajNoviApartman.cshtml" />
-    <Content Include="Views\MojProfil\Detalji.cshtml" />
     <Content Include="Views\MojProfil\ListajApartmane.cshtml" />
+    <Content Include="Views\MojProfil\Detalji.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

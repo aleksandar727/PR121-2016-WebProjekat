@@ -20,7 +20,7 @@ namespace WebAplikacija.Controllers
                 korisnik = new Korisnik();
                 Session["Korisnik"] = korisnik;
             }
-            if(!korisnik.LoggedIn)
+            if (!korisnik.LoggedIn)
             {
                 return View("Greska");
             }
@@ -156,28 +156,67 @@ namespace WebAplikacija.Controllers
                 return View("Greska");*/
             List<Apartman> apartmani = new List<Apartman>();
 
-            foreach(var Korisnik in Korisnici.dictionaryKorisnici.Values)
+            foreach (var Korisnik in Korisnici.dictionaryKorisnici.Values)
             {
-                if(Korisnik.UlogaKorisnika == UlogaKorisnika.Domacin)
+                if (Korisnik.UlogaKorisnika == UlogaKorisnika.Domacin)
                 {
-                    foreach(var Apartman in Korisnik.Apartmani)
+                    foreach (var Apartman in Korisnik.Apartmani)
                     {
                         apartmani.Add(Apartman);
-                        
+
                     }
                 }
             }
-            
-           
+
+
             //ViewBag.Apartmani = apartmani;
             //ViewBag.Rezervacije = korisnik.Rezervacije;
             ViewBag.Korisnik = korisnik;
             return View(apartmani);
         }
 
+        // Get: /MojProfil/Detalji?id=0
         public ActionResult Detalji()
         {
-            return View();
+            Korisnik korisnik = (Korisnik)Session["Korisnik"];
+            if (korisnik == null)
+            {
+                korisnik = new Korisnik();
+                Session["Korisnik"] = korisnik;
+            }
+
+
+            Apartman izabraniApartman = null;
+            List<Apartman> apartmani = new List<Apartman>();
+
+            foreach (var Korisnik in Korisnici.dictionaryKorisnici.Values)
+            {
+                if (Korisnik.UlogaKorisnika == UlogaKorisnika.Domacin)
+                {
+                    foreach (var Apartman in Korisnik.Apartmani)
+                    {
+                        apartmani.Add(Apartman);
+
+                    }
+                }
+            }
+
+            try
+            {
+                izabraniApartman = apartmani.ElementAt(int.Parse(Request["id"]));
+            }
+            catch(Exception e) { }
+
+            ViewBag.Korisnik = korisnik;
+
+            if (izabraniApartman == null)
+            {
+                
+                return View("Greska");
+            }
+
+            
+            return View(izabraniApartman);
         }
 
         public ActionResult DodajApartman() // Prikaz forme
@@ -225,7 +264,7 @@ namespace WebAplikacija.Controllers
 
             if (!string.IsNullOrEmpty(Request["BrojSoba"]))
             {
-                if(int.TryParse(Request["BrojSoba"], out int brojSoba))
+                if (int.TryParse(Request["BrojSoba"], out int brojSoba))
                 {
                     apartman.BrojSoba = brojSoba;
                 }
@@ -233,7 +272,7 @@ namespace WebAplikacija.Controllers
                 {
                     ViewBag.ErrorMessageBrojSoba = "Niste uneli broj (Soba).";
                     ErrorMessageCount++;
-                }                
+                }
             }
             else
             {
@@ -276,11 +315,11 @@ namespace WebAplikacija.Controllers
                     ViewBag.ErrorMessageLokacija = "Niste uneli broj adrese.";
                     ErrorMessageCount++;
                 }
-                    
+
 
                 apartman.Lokacija.Adresa.Ulica = address[1];
                 apartman.Lokacija.Adresa.NaseljenoMesto = address[4];
-                if(int.TryParse(address[address.Count() - 2], out int postarinskiBroj))
+                if (int.TryParse(address[address.Count() - 2], out int postarinskiBroj))
                 {
                     apartman.Lokacija.Adresa.PostarinskiBroj = postarinskiBroj;
                 }
@@ -289,8 +328,8 @@ namespace WebAplikacija.Controllers
                     ViewBag.ErrorMessageLokacija += " Niste uneli postarinski broj adrese.";
                     ErrorMessageCount++;
                 }
-                
-                if(decimal.TryParse(longitude, out decimal geofDuzina))
+
+                if (decimal.TryParse(longitude, out decimal geofDuzina))
                 {
                     apartman.Lokacija.GeografskaDuzina = geofDuzina;
                 }
@@ -369,7 +408,7 @@ namespace WebAplikacija.Controllers
             if (!string.IsNullOrEmpty(Request["VremeZaPrijavu"]))
             {
                 apartman.VremeZaPrijavu = Request["VremeZaPrijavu"];
-                if(!apartman.VremeZaPrijavu.Contains("PM"))
+                if (!apartman.VremeZaPrijavu.Contains("PM"))
                 {
                     apartman.VremeZaPrijavu += " PM";
                 }
@@ -394,23 +433,23 @@ namespace WebAplikacija.Controllers
                 ErrorMessageCount++;
             }
 
-            if(!string.IsNullOrEmpty(Request["ListaSadrzajaApartmana"]))
+            if (!string.IsNullOrEmpty(Request["ListaSadrzajaApartmana"]))
             {
                 int i = 1;
                 string[] splitRequest = Request["ListaSadrzajaApartmana"].Split(',');
-                foreach(var s in splitRequest)
+                foreach (var s in splitRequest)
                 {
-                    apartman.ListaSadrzajaApartmana.Add(new SadrzajApartmana(i,s));
+                    apartman.ListaSadrzajaApartmana.Add(new SadrzajApartmana(i, s));
                     i++;
                 }
             }
             else
             {
-                    ViewBag.ErrorMessageListaSadrzajaApartmana = "Niste uneli sadrzaj/e.";
-                    ErrorMessageCount++;
+                ViewBag.ErrorMessageListaSadrzajaApartmana = "Niste uneli sadrzaj/e.";
+                ErrorMessageCount++;
             }
 
-            if(ErrorMessageCount == 0)
+            if (ErrorMessageCount == 0)
             {
                 if (Request.Files.Count > 0)
                 {
@@ -440,21 +479,21 @@ namespace WebAplikacija.Controllers
                     ErrorMessageCount++;
                 }
             }
-            
 
-            if(ErrorMessageCount > 0)
+
+            if (ErrorMessageCount > 0)
             {
                 ViewBag.Korisnik = korisnik;
                 return View("DodajNoviApartman");
             }
 
-            if(!Korisnici.dictionaryKorisnici[korisnik.KorisnickoIme].Apartmani.Contains(apartman))
+            if (!Korisnici.dictionaryKorisnici[korisnik.KorisnickoIme].Apartmani.Contains(apartman))
             {
                 Korisnici.dictionaryKorisnici[korisnik.KorisnickoIme].Apartmani.Add(apartman);
             }
 
             ViewBag.Korisnik = korisnik;
-            return View("DodajNoviApartman");
+            return RedirectToAction("ListajApartmane"); 
         }
 
         private IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
