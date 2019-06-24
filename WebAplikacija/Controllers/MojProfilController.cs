@@ -518,7 +518,7 @@ namespace WebAplikacija.Controllers
             }
 
             ViewBag.Korisnik = korisnik;
-            return RedirectToAction("MojiApartmani"); 
+            return RedirectToAction("MojiApartmani"); //
         }
 
         private IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
