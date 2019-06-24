@@ -33,6 +33,7 @@ namespace WebAplikacija.Models
             this.Apartmani = new List<Apartman>();
             this.Rezervacije = new List<Rezervacija>();
             this.LoggedIn = false;
+            this.UlogaKorisnika = UlogaKorisnika.Neulogovan;
         }
         public Korisnik(string KorisnickoIme, string Lozinka, string Ime, string Prezime, UlogaKorisnika UlogaKorisnika, List<Apartman> Apartmani, List<Rezervacija> Rezervacije) : this()
         {
@@ -96,6 +97,7 @@ namespace WebAplikacija.Models
     {
         Gost,
         Administrator,
-        Domacin 
+        Domacin,
+        Neulogovan
     }
 }

@@ -215,6 +215,7 @@
     <Content Include="Views\MojProfil\DodajNoviApartman.cshtml" />
     <Content Include="Views\MojProfil\ListajApartmane.cshtml" />
     <Content Include="Views\MojProfil\Detalji.cshtml" />
+    <Content Include="Views\MojProfil\MojiApartmani.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

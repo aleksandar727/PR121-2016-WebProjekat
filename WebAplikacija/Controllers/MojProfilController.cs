@@ -175,6 +175,31 @@ namespace WebAplikacija.Controllers
             return View(apartmani);
         }
 
+        public ActionResult MojiApartmani()
+        {
+            Korisnik korisnik = (Korisnik)Session["Korisnik"];
+            if (korisnik == null)
+            {
+                korisnik = new Korisnik();
+                Session["Korisnik"] = korisnik;
+            }
+
+            if (korisnik.UlogaKorisnika != UlogaKorisnika.Domacin)
+                return View("Greska");
+            List<Apartman> apartmani = new List<Apartman>();
+
+            foreach (var Apartman in korisnik.Apartmani)
+            {
+                apartmani.Add(Apartman);
+            }
+
+
+            //ViewBag.Apartmani = apartmani;
+            //ViewBag.Rezervacije = korisnik.Rezervacije;
+            ViewBag.Korisnik = korisnik;          
+            return View(apartmani);
+        }
+
         // Get: /MojProfil/Detalji?id=0
         public ActionResult Detalji()
         {
@@ -493,7 +518,7 @@ namespace WebAplikacija.Controllers
             }
 
             ViewBag.Korisnik = korisnik;
-            return RedirectToAction("ListajApartmane"); 
+            return RedirectToAction("MojiApartmani"); 
         }
 
         private IEnumerable<DateTime> EachDay(DateTime from, DateTime to)

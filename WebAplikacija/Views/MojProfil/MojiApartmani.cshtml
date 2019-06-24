@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebAplikacija.Models.Apartman>
+
+@{
+    /**/
+
+    ViewBag.Title = "ListajApartmane";
+}
+<style>
+    td {
+        white-space: pre
+    }
+
+    a {
+        color: black
+    }
+</style>
+
+<h2>Apartmani</h2>
+@if (ViewBag.Korisnik.IsDomacin())
+{
+    if (Model.Count() > 0)
+    {
+        int i = 0;
+        <table>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td><img src="~/Images/@s.SlikeApartmana.FirstOrDefault().name" onclick="location.href='Detalji?id=@i'" height="70" width="70" /></td> <!-- Jedna slika -->
+                    <td>&nbsp;</td>
+                    <td>
+                        <a href="~/MojProfil/Detalji?id=@i">@s.TipApartmana, @s.Lokacija.Adresa.NaseljenoMesto</a>
+                        @s.Lokacija.Adresa.Ulica @s.Lokacija.Adresa.Broj
+                        @s.Lokacija.Adresa.NaseljenoMesto @s.Lokacija.Adresa.PostarinskiBroj
+                        @s.Lokacija.GeografskaSirina, @s.Lokacija.GeografskaDuzina
+                    </td>
+                    <td>&nbsp;</td>
+
+                    <!-- OPIS -->
+                    <td>
+                        Broj soba: @s.BrojSoba, Broj gostiju: @s.BrojGostiju
+                        Datumi za izdavanje: @s.DatumiZaIzdavanje.FirstOrDefault() - @s.DatumiZaIzdavanje.LastOrDefault()
+
+
+                    </td>
+                    <td>
+                        Vreme za prijavu: @s.VremeZaPrijavu
+                        Vreme za odjavu: @s.VremeZaOdjavu
+
+
+                    </td>
+                    <td>
+                        Cena: @s.CenaPoNoci
+                        Status: @s.Status
+
+
+                    </td>
+                </tr>
+
+
+                i++;
+            }
+        </table>
+    }
+    else
+    {
+        <p>Nema dostupnih apartmana.</p>
+    }
+}
+else
+{
+    <p>Nemate pravo za pristup.</p>
+}
